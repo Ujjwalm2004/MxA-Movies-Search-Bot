@@ -51,7 +51,7 @@ def search(client, message):
 
 
 @mxabot.on_message(filters.command("mkv"))
-def mkv_command(client: Client, message: Message):
+def mkv_command(client, message):
     try:
         link = message.text.split(" ")[1]
         if "mkvcinemas" not in link:
@@ -68,7 +68,7 @@ def mkv_command(client: Client, message: Message):
 
 
 @mxabot.on_message(filters.command("mkvc"))
-def mkvcinemas(client: Client, message: Message):
+def mkvcinemas(client, message):
     try:
         link = message.text.split(" ")[1]
         if "mkvcinemas" not in link:
