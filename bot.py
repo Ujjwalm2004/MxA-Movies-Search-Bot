@@ -36,6 +36,89 @@ def scrape(query):
     return None
 
 
+
+@mxabot.on_message(filters.command("links"))
+def get_links(client, message):
+    url = message.text.split(" ", 1)[1]
+    response = requests.get(url)
+    html_content = response.text
+    soup = BeautifulSoup(html_content, "html.parser")
+    gdlinks = soup.find_all("a", class_="gdlink")
+    if gdlinks:
+        pattern_480p = re.compile(r"\b480p\b", re.IGNORECASE)
+        pattern_720p = re.compile(r"\b720p\b", re.IGNORECASE)
+        pattern_1080p = re.compile(r"\b1080p\b", re.IGNORECASE)
+        links = {"480p": [], "720p": [], "1080p": [], "Unknown": []}
+        for link in gdlinks:
+            href = link.get("href")
+            title = link.get("title")
+            if "s0" in title.lower():
+                resolution = None
+                if pattern_480p.search(title):
+                    resolution = "480p"
+                elif pattern_720p.search(title):
+                    resolution = "720p"
+                elif pattern_1080p.search(title):
+                    resolution = "1080p"
+                else:
+                    resolution = "Unknown"
+                links[resolution].append((title, href))
+
+
+        if any(links.values()):
+            for resolution, link_list in links.items():
+                 if link_list:
+                    response_msg = f"{resolution} links:\n"         
+                    for i, (title, href) in enumerate(link_list, start=1):
+                        response_msg += f"{i}. <a href='{href}'>{title}</a>\n"
+                    message.reply_text(response_msg, disable_web_page_preview=True)
+        else:
+            response_msg = ""
+            for i, gdlink in enumerate(gdlinks, start=1):
+                title = gdlink.text.strip()
+                hyperlink = gdlink["href"]
+                response_msg += f'{i}. [{title}]({hyperlink})\n'
+            message.reply_text(response_msg, disable_web_page_preview=True)
+    else:
+        all_links = soup.find_all("a", href=lambda href: href and "https://ww3.mkvcinemas.lat?" in href)
+        response_msg = ""
+        for i, link in enumerate(all_links, start=1):
+            text = link.text.strip()
+            hyperlink = link["href"]
+            response_msg += f'{i}. [{text}]({hyperlink})\n'
+        message.reply_text(response_msg, disable_web_page_preview=True)
+ 
+
+def process_link(playwright: Playwright, link: str, message: Message) -> str:
+    try:
+        browser = playwright.chromium.launch(headless=False)
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto(link)
+        page.locator("#soralink-human-verif-main").click()
+        page.locator("#generater").click()
+        with page.expect_popup() as page1_info:
+            page.locator("#showlink").click()
+        page1 = page1_info.value
+        final_link = page1.url
+
+        context.close()
+        browser.close()
+
+return final_link
+    except Exception as e:
+        try:
+            context.close()
+        except:
+            pass
+        try:
+            browser.close()
+        except:
+            pass
+        raise e
+
+
+
 @mxabot.on_message(filters.command('search'))
 def search(client, message):
     try:
