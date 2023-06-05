@@ -89,7 +89,7 @@ def get_links(client, message):
         message.reply_text(response_msg, disable_web_page_preview=True)
  
 
-def process_link(playwright: Playwright, link: str, message: Message) -> str:
+def process_link(playwright: Playwright, link: str, message) -> str:
     try:
         browser = playwright.chromium.launch(headless=False)
         context = browser.new_context()
