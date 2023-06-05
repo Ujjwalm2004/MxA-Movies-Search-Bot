@@ -3,3 +3,5 @@ TgCrypto
 requests
 beautifulsoup4
 playwright
+psutil
+Pillow
