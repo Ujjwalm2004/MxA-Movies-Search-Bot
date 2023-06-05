@@ -105,7 +105,7 @@ def process_link(playwright: Playwright, link: str, message: Message) -> str:
         context.close()
         browser.close()
 
-return final_link
+        return final_link
     except Exception as e:
         try:
             context.close()
