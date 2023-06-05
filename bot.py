@@ -50,6 +50,59 @@ def search(client, message):
         message.reply_text("No search results found.")
 
 
+@mxabot.on_message(filters.command("mkv"))
+def mkv_command(client: Client, message: Message):
+    try:
+        link = message.text.split(" ")[1]
+        if "mkvcinemas" not in link:
+            message.reply_text("Invalid link. Link must be of 'mkvcinemas.com'.")
+            return
+        process_message = message.reply_text("Processing link, please wait...", quote=True)
+        with sync_playwright() as playwright:
+            final_link = process_link(playwright, link, message)
+        process_message.edit_text(f"Link processed successfully! \n{final_link}", disable_web_page_preview=True)
+    except IndexError:
+        message.reply_text("Please provide a valid link after the command. For example, `/mkv https://example.com`", quote=True)
+    except Exception as e:
+        message.reply_text(f"An error occurred while processing the link: {e}", quote=True)
+
+
+@mxabot.on_message(filters.command("mkvc"))
+def mkvcinemas(client: Client, message: Message):
+    try:
+     link = message.text.split(" ")[1]
+        if "mkvcinemas" not in link:
+            message.reply_text("Invalid link. Link must be of 'mkvcinemas.com'.")
+            return
+        process_message = message.reply_text("Processing link, please wait...", quote=True)
+        response = requests.get(link)
+        html_content = response.text
+        soup = BeautifulSoup(html_content, "html.parser")
+        links = [a["href"] for a in soup.find_all("a", {"class": "gdlink"}, href=True)]
+
+        final_links = []
+
+        for link in links:
+            if "mkvcinemas" in link:
+                with sync_playwright() as playwright:
+                    final_link = process_link(playwright, link, message)
+                    title = soup.find("a", {"href": link, "class": "gdlink"}).text
+                    final_link += f" - {title}\n"
+                    final_links.append(final_link)
+        final_links_text = "\n".join(final_links)
+        links_per_message = 5
+        final_links_chunks = [final_links[i:i+links_per_message] for i in range(0, len(final_links), links_per_message)]
+        for i, links_chunk in enumerate(final_links_chunks):
+            message_text = f"Links processed successfully! (Part {i+1}/{len(final_links_chunks)}) \n\n" + "\n".join(links_chunk)
+            message.reply_text(message_text, disable_web_page_preview=True)
+    except IndexError:
+        message.reply_text("Please provide a valid link after the command. For example, `/mkv https://example.com`", quote=True)
+
+    except Exception as e:
+        # When an error occurs during the processing of the link
+        message.reply_text(f"An error occurred while processing the link: {e}", quote=True)
+
+
 
 mxabot.run()
 
