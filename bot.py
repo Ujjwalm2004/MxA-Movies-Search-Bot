@@ -70,7 +70,7 @@ def mkv_command(client: Client, message: Message):
 @mxabot.on_message(filters.command("mkvc"))
 def mkvcinemas(client: Client, message: Message):
     try:
-     link = message.text.split(" ")[1]
+        link = message.text.split(" ")[1]
         if "mkvcinemas" not in link:
             message.reply_text("Invalid link. Link must be of 'mkvcinemas.com'.")
             return
