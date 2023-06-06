@@ -23,15 +23,15 @@ def start(client, message):
     time.sleep(0.5)
     start_msg.edit_text(
        text="▣ ▣ ▢"
-        )
+    )
     time.sleep(0.5)
     start_msg.edit_text(
        text="▣ ▣ ▣"
-        )
+    )
     time.sleep(0.5)
     start_msg.edit_text(
        text="Hᴇʟʟᴏ I Aᴍ @Mxa_Movies_Bot!\n\nI Cᴀɴ Sᴇᴀʀᴄʜ Mᴏᴠɪᴇs Oɴ Sᴇᴄɪғɪᴄ Wᴇʙsɪᴛᴇ\nJᴜsᴛ Sᴇɴᴅ Cᴏᴍᴍᴀɴᴅ Aɴᴅ Mᴏᴠɪᴇ Nᴀᴍᴇ"
-        )
+    )
 
 
 def scrape(query):
