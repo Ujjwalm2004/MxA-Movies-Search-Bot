@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import UserNotParticipant
 import os
 from os import getenv
 from bs4 import BeautifulSoup
@@ -14,10 +15,26 @@ BOT_TOKEN = getenv("BOT_TOKEN")
 #PICS = (getenv('PICS', '')).split()
 
 mxabot = Client('Mxa_Movies_Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-
+FSUB_CHANNEL = "Movies_X_Animes"
 
 @mxabot.on_message(filters.command('start'))
 def start(client, message):
+    if FSUB_CHANNEL:
+        try:
+            user = client.get_chat_member(FSUB_CHANNEL, message.from_user.id)
+            if user.status == "kicked out":
+                message.reply_text("Sorry you are banned 🥲")
+                return
+        exept UserNotParticipant:
+            message.reply_text(
+                text="Hey bruh you have to subscribe my update channel to use me")
+                reply_markup=InlineKeyboardMarkup( [[
+                    InlineKeyboardButton("Join", url = f"t.me/{FSUB_CHANNEL}")
+                    ]]
+                    )
+                )
+                return
+
     start_msg = message.reply("▣ ▢ ▢")
     time.sleep(0.5)
     start_msg.edit_text(
