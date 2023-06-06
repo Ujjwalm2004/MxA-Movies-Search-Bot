@@ -30,7 +30,7 @@ def start(client, message):
                 text="Hey bruh you have to subscribe my update channel to use me")
                 reply_markup=InlineKeyboardMarkup( [[
                     InlineKeyboardButton("Join", url = f"t.me/{FSUB_CHANNEL}")
-                    ]] )
+                    ]]
                     )
                 return
 
