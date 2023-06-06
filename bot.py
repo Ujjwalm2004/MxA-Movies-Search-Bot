@@ -18,8 +18,7 @@ mxabot = Client('Mxa_Movies_Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BO
 
 @mxabot.on_message(filters.command('start'))
 def start(client, message):
-    client.send_message(message.chat.id,(
-       text="▣ ▢ ▢"
+    client.send_message(message.chat.id,("▣ ▢ ▢")
         )
     client.message.edit_text(
        text="▣ ▣ ▢"
