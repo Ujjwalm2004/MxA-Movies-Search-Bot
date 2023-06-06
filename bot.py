@@ -18,18 +18,18 @@ mxabot = Client('Mxa_Movies_Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BO
 
 @mxabot.on_message(filters.command('start'))
 def start(client, message):
-    start_msg = client.send_message(message.chat.id,("▣ ▢ ▢")
+    start_msg = await message.reply("▣ ▢ ▢")
         )
     time.sleep(0.5)
-    start_msg.message.edit_text(
+    start_msg.edit_text(
        text="▣ ▣ ▢"
         )
     time.sleep(0.5)
-    start_msg.message.edit_text(
+    start_msg.edit_text(
        text="▣ ▣ ▣"
         )
     time.sleep(0.5)
-    start_msg.message.edit_text(
+    start_msg.edit_text(
        text="Hᴇʟʟᴏ I Aᴍ @Mxa_Movies_Bot!\n\nI Cᴀɴ Sᴇᴀʀᴄʜ Mᴏᴠɪᴇs Oɴ Sᴇᴄɪғɪᴄ Wᴇʙsɪᴛᴇ\nJᴜsᴛ Sᴇɴᴅ Cᴏᴍᴍᴀɴᴅ Aɴᴅ Mᴏᴠɪᴇ Nᴀᴍᴇ"
         )
 
