@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 from playwright.sync_api import Playwright, sync_playwright
-
+import time
 
 API_ID = int(getenv("API_ID"))
 API_HASH = getenv("API_HASH")
@@ -20,12 +20,15 @@ mxabot = Client('Mxa_Movies_Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BO
 def start(client, message):
     client.send_message(message.chat.id,("▣ ▢ ▢")
         )
+    time.sleep(0.5)
     client.message.edit_text(
        text="▣ ▣ ▢"
         )
+    time.sleep(0.5)
     client.message.edit_text(
        text="▣ ▣ ▣"
-        )       
+        )
+    time.sleep(0.5)
     client.message.edit_text(
        text="Hᴇʟʟᴏ I Aᴍ @Mxa_Movies_Bot!\n\nI Cᴀɴ Sᴇᴀʀᴄʜ Mᴏᴠɪᴇs Oɴ Sᴇᴄɪғɪᴄ Wᴇʙsɪᴛᴇ\nJᴜsᴛ Sᴇɴᴅ Cᴏᴍᴍᴀɴᴅ Aɴᴅ Mᴏᴠɪᴇ Nᴀᴍᴇ"
         )
