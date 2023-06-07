@@ -138,17 +138,17 @@ def search(client, message):
 
 
 @mxabot.on.callback_query()
-async def callback(bot: Client, cmd: CallbackQuery):
+async def callback(client, cmd: CallbackQuery):
     if cmd.data == "refreshfsub":
-        rfrsh_msg = message.reply("Checking Please wait...")
+        rfrsh_msg = cmd.reply("Checking Please wait...")
     if FSUB_CHANNEL:
         try:
             user = client.get_chat_member(FSUB_CHANNEL, message.from_user.id)
             if user.status == "kicked out":
-                message.reply_text("Sorry you are banned 🥲")
+                cmd.reply_text("Sorry you are banned 🥲")
                 return
         except UserNotParticipant:
-            message.reply_text(
+            cmd.reply_text(
                 text="Hey bruh you have to subscribe my update channel to use me",
                 reply_markup=InlineKeyboardMarkup(
                 [
@@ -163,7 +163,7 @@ async def callback(bot: Client, cmd: CallbackQuery):
     )
             return
     rfrsh_msg.delete()
-    new_msg = message.reply("Done You Are Subscriber of My Updates Channel")
+    new_msg = cmd.reply("Done You Are Subscriber of My Updates Channel")
     time.sleel(2)
     new_msg.edit_text("▣ ▢ ▢")
     time.sleep(0.5)
