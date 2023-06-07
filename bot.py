@@ -29,7 +29,7 @@ def start(client, message):
             message.reply_text(
                 text="Hey bruh you have to subscribe my update channel to use me")
                 reply_markup=InlineKeyboardMarkup(
-                [
+                    [
                     [
                         InlineKeyboardButton("Join Channel", url=f"t.me/{FSUB_CHANNEL}")
                     ],
@@ -40,7 +40,6 @@ def start(client, message):
             )
         )
                 return
-
     start_msg = message.reply("▣ ▢ ▢")
     time.sleep(0.5)
     start_msg.edit_text(
