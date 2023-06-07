@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram.errors import UserNotParticipant
 import os
 from os import getenv
@@ -241,6 +241,11 @@ def mkvcinemas(client, message):
         message.reply_text(f"An error occurred while processing the link: {e}", quote=True)
 
 
+@mxabot.on.callback_query()
+async def callback(bot: Client, cmd: CallbackQuery):
+        cb_data = cmd.data
+
+ 
 
 mxabot.run()
 
