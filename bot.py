@@ -29,10 +29,10 @@ def start(client, message):
                 reply_markup=InlineKeyboardMarkup(
                 [
                 [
-                   InlineKeyboardButton("Join Channel", url=f"t.me/{FSUB_CHANNEL}")
+                   InlineKeyboardButton("Join Channel 📣", url=f"t.me/{FSUB_CHANNEL}")
                 ],
                 [
-                    InlineKeyboardButton("Contact Admin", url="t.me/iSmartBoiUjjwal_ib_bot")
+                    InlineKeyboardButton("Refresh 🔄", callback_data="refreshfsub")
                 ]
             ]
         )
@@ -139,8 +139,53 @@ def search(client, message):
 
 @mxabot.on.callback_query()
 async def callback(bot: Client, cmd: CallbackQuery):
+    if cmd.data == "refreshfsub":
+        rfrsh_msg = message.reply("Checking Please wait...")
+    if FSUB_CHANNEL:
+        try:
+            user = client.get_chat_member(FSUB_CHANNEL, message.from_user.id)
+            if user.status == "kicked out":
+                message.reply_text("Sorry you are banned 🥲")
+                return
+        except UserNotParticipant:
+            message.reply_text(
+                text="Hey bruh you have to subscribe my update channel to use me",
+                reply_markup=InlineKeyboardMarkup(
+                [
+                [
+                   InlineKeyboardButton("Join Channel", url=f"t.me/{FSUB_CHANNEL}")
+                ],
+                [
+                    InlineKeyboardButton("Contact Admin", url="t.me/iSmartBoiUjjwal_ib_bot")
+                ]
+            ]
+        )
+    )
+            return
+    rfrsh_msg.delete()
+    new_msg = message.reply("Done You Are Subscriber of My Updates Channel")
+    time.sleel(2)
+    new_msg.edit_text("▣ ▢ ▢")
+    time.sleep(0.5)
+    new_msg.edit_text(
+       text="▣ ▣ ▢"
+    )
+    time.sleep(0.5)
+    new_msg.edit_text(
+       text="▣ ▣ ▣"
+    )
+    time.sleep(0.5)
+    new_msg.edit_text(
+       text="Hᴇʟʟᴏ I Aᴍ @Mxa_Movies_Bot!\n\nI Cᴀɴ Sᴇᴀʀᴄʜ Mᴏᴠɪᴇs Oɴ Sᴇᴄɪғɪᴄ Wᴇʙsɪᴛᴇ\nJᴜsᴛ Sᴇɴᴅ Cᴏᴍᴍᴀɴᴅ Aɴᴅ Mᴏᴠɪᴇ Nᴀᴍᴇ",
+       reply_markup=InlineKeyboardMarkup(
+                [
+                [
+                   InlineKeyboardButton("Channel", url=f"t.me/{FSUB_CHANNEL}")
+                ]
+                ]
+       )
+    )
 
-  
 
  
 
