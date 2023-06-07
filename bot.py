@@ -137,7 +137,7 @@ def search(client, message):
         message.reply_text("No search results found.")
 
 
-@mxabot.on.callback_query()
+@mxabot.on_callback_query()
 async def callback(client, cmd: CallbackQuery):
     if cmd.data == "refreshfsub":
         rfrsh_msg = cmd.reply("Checking Please wait...")
