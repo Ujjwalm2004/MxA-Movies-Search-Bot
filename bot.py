@@ -39,7 +39,8 @@ def start(client, message):
             ]
         )
     )
-                return
+            return
+
     start_msg = message.reply("▣ ▢ ▢")
     time.sleep(0.5)
     start_msg.edit_text(
