@@ -28,12 +28,17 @@ def start(client, message):
         except UserNotParticipant:
             message.reply_text(
                 text="Hey bruh you have to subscribe my update channel to use me")
-                reply_markup=InlineKeyboardMarkup( 
-                    [[
-                    InlineKeyboardButton("Join", url = f"t.me/{FSUB_CHANNEL}")
-                    ]]
-                    )
-                )
+                reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton("Join Channel", url=f"t.me/{FSUB_CHANNEL}")
+                    ],
+                    [
+                        InlineKeyboardButton("Contact Admin", url="t.me/iSmartBoiUjjwal_ib_bot")
+                    ]
+                ]
+            )
+        )
                 return
 
     start_msg = message.reply("▣ ▢ ▢")
