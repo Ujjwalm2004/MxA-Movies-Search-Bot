@@ -27,7 +27,7 @@ def start(client, message):
                 return
         except UserNotParticipant:
             message.reply_text(
-                text="Hey bruh you have to subscribe my update channel to use me"
+                text="Hey bruh you have to subscribe my update channel to use me",
                 reply_markup=InlineKeyboardMarkup(
                 [
                 [
