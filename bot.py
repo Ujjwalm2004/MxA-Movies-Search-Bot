@@ -1,7 +1,7 @@
 from pyrogram import Client, filters , types
-from flask import Flask
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram.errors import UserNotParticipant
+from app import app
 import os
 from os import getenv
 from bs4 import BeautifulSoup
@@ -13,14 +13,10 @@ API_ID = int(getenv("API_ID"))
 API_HASH = getenv("API_HASH")
 BOT_TOKEN = getenv("BOT_TOKEN")
 
-mxaapp = Flask(__name__)
 mxabot = Client('Mxa_Movies_Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 FSUB_CHANNEL = "Movies_X_Animes"
 
 
-@mxaapp.route('/')
-def alive():
-    return 'I Am Alive!'
     
 
 @mxabot.on_message(filters.command('start'))
@@ -198,4 +194,4 @@ async def callback(client, cmd: CallbackQuery):
 
 if __name__ == "__main__":
     mxabot.start()
-    mxaapp.run()
+    app.run()
