@@ -1,6 +1,6 @@
 from pyrogram import Client, filters , types
-from flask import Flask, request
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, Update
+from flask import Flask
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram.errors import UserNotParticipant
 import os
 from os import getenv
@@ -21,12 +21,6 @@ FSUB_CHANNEL = "Movies_X_Animes"
 @mxaapp.route('/')
 def alive():
     return 'I Am Alive!'
-
-@mxaapp.route('/{}'.format(BOT_TOKEN), methods=['POST'])
-def respond():
-    update = Update.de_json(request.get_json(force=True), mxabot)
-    mxabot.process_message(update)
-    return 'Done'
     
 
 @mxabot.on_message(filters.command('start'))
